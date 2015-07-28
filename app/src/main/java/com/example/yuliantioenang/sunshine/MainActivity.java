@@ -6,8 +6,12 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.yuliantioenang.sunshine.data.WeatherContract;
+import com.example.yuliantioenang.sunshine.sync.SunshineSyncAdapter;
 
 
 public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback{
@@ -29,7 +33,12 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             }
         } else {
             mTwoPane = false;
+            getSupportActionBar().setElevation(0f);
         }
+
+        ForecastFragment forecastFragment = (ForecastFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_forecast);
+        forecastFragment.setUseTodayLayout(!mTwoPane);
+        SunshineSyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override
@@ -50,31 +59,20 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
-        } else if (id == R.id.action_map) {
-            openPreferedLocation();
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void openPreferedLocation(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String location = preferences.getString(getString(R.string.pref_location_key),
-                getString(R.string.pref_location_default));
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
-        Uri geoLocation = Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q", location).build();
-        mapIntent.setData(geoLocation);
-        if(mapIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(mapIntent);
-        }
-    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         String currentLocation = Utility.getPreferredLocation(this);
-        if (currentLocation != null && ! currentLocation.equals(mLocation)){
+
+        Log.d("test4", currentLocation);
+        if (currentLocation != null && !currentLocation.equals(mLocation)){
             ForecastFragment ff = (ForecastFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_forecast);
             if(ff != null) {
                 ff.onLocationChanged();
@@ -94,7 +92,6 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         if (mTwoPane) {
             Bundle arg = new Bundle();
             arg.putParcelable(DetailActivityFragment.URI, dateUri);
-
             DetailActivityFragment df = new DetailActivityFragment();
             df.setArguments(arg);
 
@@ -102,7 +99,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
                     .replace(R.id.weather_detail_container, df, DETAILFRAGMENT_TAG)
                     .commit();
         } else {
-            Intent intent = new Intent(this, DetailActivityFragment.class);
+            Intent intent = new Intent(this, DetailActivity.class);
             intent.setData(dateUri);
             startActivity(intent);
         }

@@ -1,0 +1,103 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yuliantioenang.sunshine.DetailActivityFragment"
+    tools:showIn="@layout/layout">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="6dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="56dp">
+
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="120dp"
+                android:id="@+id/detail_day_textview"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_date_textview"
+                android:textColor="@color/grey_700"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp">
+            <TextView
+                android:fontFamily="sans-serif-light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_high_textview"
+                android:textSize="96sp"/>
+
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/grey_700"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="48sp"
+                android:id="@+id/detail_low_textview"/>
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:id="@+id/detail_humidity_textview"
+                />
+
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:id="@+id/detail_wind_textview" />
+
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:id="@+id/detail_pressure_textview" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_icon" />
+
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey_700"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:id="@+id/detail_forecast_textview" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
